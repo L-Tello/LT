@@ -64,7 +64,7 @@ def registro_doctor():
     nombre_usuario = cuerpo['nombre_usuario']
     if(existe_usuario(nombre_usuario)):
         return jsonify({'agregado':0,'mensaje':'Ya existe un usuario con este nombre'})
-    contrasena = cuerpo['contraseña']
+    contrasena = cuerpo['contrasena']
     especialidad = cuerpo['especialidad']
     telefono = cuerpo['telefono']
     nuevo_doctor = Doctor(nombre,apellido,fecha_nacimiento,sexo,nombre_usuario,contrasena,especialidad,telefono)
