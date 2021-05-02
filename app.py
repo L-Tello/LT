@@ -4,21 +4,24 @@ import json
 import os
 from Pacientes import Paciente
 from Medicamentos import Medicamento
+from Doctores import Doctor
+from Enfermeras import Enfermera
 
 app = Flask(__name__)
 CORS(app)
 
 #Almacenamiento
 administrador = {
-    "nombre":"ingrid",
-    "apellido":"perez",
+    "nombre":"ludwin",
+    "apellido":"Tello",
     "nombre_usuario":"admin",
     "contrasena":"1234"
 }
 
 pacientes = []
 medicamentos = []
-
+doctores = []
+enfermeras = []
 @app.route('/', methods=['GET'])
 def principal():
     return "Api Taller 1"
@@ -54,18 +57,38 @@ def login():
     contrasena = request.args.get("contrasena")
     if not existe_usuario(nombre_usuario):
         return jsonify({'estado': 0, 'mensaje':'No existe este usuario'})
-    if verificar_contrasena(nombre_usuario,contrasena):
+    if verificar_contrasena(nombre_usuario,contrasena) == 1:
+        return jsonify({'estado': 1, 'mensaje':'Login exitoso'})
+    return jsonify({'estado': 0, 'mensaje':'La contraseña es incorrecta'})
+    if verificar_contrasena(nombre_usuario,contrasena) == 2:
+        return jsonify({'estado': 1, 'mensaje':'Login exitoso'})
+    return jsonify({'estado': 0, 'mensaje':'La contraseña es incorrecta'})
+    if verificar_contrasena(nombre_usuario,contrasena) == 3:
+        return jsonify({'estado': 1, 'mensaje':'Login exitoso'})
+    return jsonify({'estado': 0, 'mensaje':'La contraseña es incorrecta'})
+    if verificar_contrasena(nombre_usuario,contrasena) == 4:
         return jsonify({'estado': 1, 'mensaje':'Login exitoso'})
     return jsonify({'estado': 0, 'mensaje':'La contraseña es incorrecta'})
     
 
 def verificar_contrasena(nombre_usuario, contrasena):
     if nombre_usuario == administrador['nombre_usuario'] and contrasena == administrador['contrasena']:
-        return True
+        return 1
     global pacientes
     for paciente in pacientes:
         if paciente.nombre_usuario == nombre_usuario and paciente.contrasena == contrasena:
-            return True
+            return 2
+    global enfermeras
+    for enfermera in enfermeras:
+        if enfermera.nombre_usuario == nombre_usuario and enfermera.contrasena == contrasena:
+            return 3
+
+    global doctores
+    for doctor in doctores:
+        if doctor.nombre_usuario == nombre_usuario and doctor.contrasena == contrasena:
+            return 4
+
+    
     return False
 
 def existe_usuario(nombre_usuario):
@@ -74,6 +97,14 @@ def existe_usuario(nombre_usuario):
     global pacientes
     for paciente in pacientes:
         if paciente.nombre_usuario == nombre_usuario:
+            return True
+    global enfermeras
+    for enfermera in enfermeras
+        if enfermera.nombre_usuario == nombre_usuario
+            return True
+    global doctores
+    for doctor in doctores:
+        if doctor.nombre_usuario == nombre_usuario:
             return True
     return False
 
