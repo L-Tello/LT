@@ -61,13 +61,13 @@ def login():
         return jsonify({'estado': 1, 'mensaje':'Login exitoso'})
     return jsonify({'estado': 0, 'mensaje':'La contraseña es incorrecta'})
     if verificar_contrasena(nombre_usuario,contrasena) == 2:
-        return jsonify({'estado': 1, 'mensaje':'Login exitoso'})
+        return jsonify({'estado': 2, 'mensaje':'Login exitoso'})
     return jsonify({'estado': 0, 'mensaje':'La contraseña es incorrecta'})
     if verificar_contrasena(nombre_usuario,contrasena) == 3:
-        return jsonify({'estado': 1, 'mensaje':'Login exitoso'})
+        return jsonify({'estado': 3, 'mensaje':'Login exitoso'})
     return jsonify({'estado': 0, 'mensaje':'La contraseña es incorrecta'})
     if verificar_contrasena(nombre_usuario,contrasena) == 4:
-        return jsonify({'estado': 1, 'mensaje':'Login exitoso'})
+        return jsonify({'estado': 4, 'mensaje':'Login exitoso'})
     return jsonify({'estado': 0, 'mensaje':'La contraseña es incorrecta'})
     
 
