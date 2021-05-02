@@ -26,10 +26,11 @@ enfermeras = []
 def principal():
     return "Api Taller 1"
 
+# Metodos pacientes
 @app.route('/registro_paciente', methods=['POST'])
 def registro_paciente():
     cuerpo = request.get_json()
-    nombre = cuerpo['nombre'] #nombre = ingrid
+    nombre = cuerpo['nombre'] 
     apellido = cuerpo['apellido']
     fecha_nacimiento = cuerpo['fecha_nacimiento']
     sexo = cuerpo['sexo']
@@ -50,6 +51,64 @@ def obtener_pacientes():
     for paciente in pacientes:
         json_pacientes.append(paciente.get_json())
     return jsonify(json_pacientes)
+
+
+#metodos doctores
+@app.route('/registro_doctor', methods=['POST'])
+def registro_doctor():
+    cuerpo = request.get_json()
+    nombre = cuerpo['nombre'] 
+    apellido = cuerpo['apellido']
+    fecha_nacimiento = cuerpo['fecha_nacimiento']
+    sexo = cuerpo['sexo']
+    nombre_usuario = cuerpo['nombre_usuario']
+    if(existe_usuario(nombre_usuario)):
+        return jsonify({'agregado':0,'mensaje':'Ya existe un usuario con este nombre'})
+    contrasena = cuerpo['contraseña']
+    especialidad = cuerpo['especialidad']
+    telefono = cuerpo['telefono']
+    nuevo_doctor = Doctor(nombre,apellido,fecha_nacimiento,sexo,nombre_usuario,contrasena,especialidad,telefono)
+    global doctores
+    doctores.append(nuevo_doctor)
+    return jsonify({'agregado':1,'mensaje':'Registro exitoso'})
+
+@app.route('/obtener_doctores', methods=['GET'])
+def obtener_doctores():
+    json_doctores = []
+    global doctores
+    for doctor in doctores:
+        json_doctores.append(doctor.get_json())
+    return jsonify(json_doctores)
+
+
+#metodos enfermeras
+@app.route('/registro_enfermera', methods=['POST'])
+def registro_enfermera():
+    cuerpo = request.get_json()
+    nombre = cuerpo['nombre'] #nombre = ingrid
+    apellido = cuerpo['apellido']
+    fecha_nacimiento = cuerpo['fecha_nacimiento']
+    sexo = cuerpo['sexo']
+    nombre_usuario = cuerpo['nombre_usuario']
+    if(existe_usuario(nombre_usuario)):
+        return jsonify({'agregado':0,'mensaje':'Ya existe un usuario con este nombre'})
+    contrasena = cuerpo['contraseña']
+    telefono = cuerpo['telefono']
+    nuevo_enfermera = Enfermera(nombre,apellido,fecha_nacimiento,sexo,nombre_usuario,contrasena,telefono)
+    global enfermeras
+    enfermeras.append(nuevo_enfermera)
+    return jsonify({'agregado':1,'mensaje':'Registro exitoso'})
+
+@app.route('/obtener_enfermeras', methods=['GET'])
+def obtener_enfermeras():
+    json_enfermeras = []
+    global enfermeras
+    for enfermera in enfermeras:
+        json_enfermeras.append(enfermera.get_json())
+    return jsonify(json_enfermeras)
+
+
+#log
 
 @app.route('/login', methods=['GET'])
 def login():
