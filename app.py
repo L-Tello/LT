@@ -22,6 +22,7 @@ pacientes = []
 medicamentos = []
 doctores = []
 enfermeras = []
+
 @app.route('/', methods=['GET'])
 def principal():
     return "Api Taller 1"
@@ -118,15 +119,16 @@ def login():
         return jsonify({'estado': 0, 'mensaje':'No existe este usuario'})
     if verificar_contrasena(nombre_usuario,contrasena) == 1:
         return jsonify({'estado': 1, 'mensaje':'Login exitoso'})
-    return jsonify({'estado': 0, 'mensaje':'La contraseña es incorrecta'})
+   
     if verificar_contrasena(nombre_usuario,contrasena) == 2:
         return jsonify({'estado': 2, 'mensaje':'Login exitoso'})
-    return jsonify({'estado': 0, 'mensaje':'La contraseña es incorrecta'})
+    
     if verificar_contrasena(nombre_usuario,contrasena) == 3:
         return jsonify({'estado': 3, 'mensaje':'Login exitoso'})
-    return jsonify({'estado': 0, 'mensaje':'La contraseña es incorrecta'})
+   
     if verificar_contrasena(nombre_usuario,contrasena) == 4:
         return jsonify({'estado': 4, 'mensaje':'Login exitoso'})
+
     return jsonify({'estado': 0, 'mensaje':'La contraseña es incorrecta'})
     
 
@@ -148,7 +150,7 @@ def verificar_contrasena(nombre_usuario, contrasena):
             return 4
 
     
-    return False
+    return 0
 
 def existe_usuario(nombre_usuario):
     if nombre_usuario == administrador['nombre_usuario']:
