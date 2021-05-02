@@ -53,7 +53,7 @@ def obtener_pacientes():
     return jsonify(json_pacientes)
 
 
-#metodos doctores
+# metodos doctores
 @app.route('/registro_doctor', methods=['POST'])
 def registro_doctor():
     cuerpo = request.get_json()
@@ -85,7 +85,7 @@ def obtener_doctores():
 @app.route('/registro_enfermera', methods=['POST'])
 def registro_enfermera():
     cuerpo = request.get_json()
-    nombre = cuerpo['nombre'] #nombre = ingrid
+    nombre = cuerpo['nombre'] 
     apellido = cuerpo['apellido']
     fecha_nacimiento = cuerpo['fecha_nacimiento']
     sexo = cuerpo['sexo']
@@ -158,8 +158,8 @@ def existe_usuario(nombre_usuario):
         if paciente.nombre_usuario == nombre_usuario:
             return True
     global enfermeras
-    for enfermera in enfermeras
-        if enfermera.nombre_usuario == nombre_usuario
+    for enfermera in enfermeras:
+        if enfermera.nombre_usuario == nombre_usuario:
             return True
     global doctores
     for doctor in doctores:
