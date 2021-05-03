@@ -93,7 +93,7 @@ def registro_enfermera():
     nombre_usuario = cuerpo['nombre_usuario']
     if(existe_usuario(nombre_usuario)):
         return jsonify({'agregado':0,'mensaje':'Ya existe un usuario con este nombre'})
-    contrasena = cuerpo['contraseña']
+    contrasena = cuerpo['contrasena']
     telefono = cuerpo['telefono']
     nuevo_enfermera = Enfermera(nombre,apellido,fecha_nacimiento,sexo,nombre_usuario,contrasena,telefono)
     global enfermeras
